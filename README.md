@@ -2,7 +2,8 @@
 
 ## Redux
 
-This is simple list of services with their prices. You can edit, delete or add items on the list.
+This is a list of services with their prices. You can edit, delete or add items on the list.
+This app does not use any backend.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
