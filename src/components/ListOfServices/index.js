@@ -1,41 +1,50 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeService, prepareToEdit } from '../../redux/actionsWithServices';
+import {
+  removeService,
+  editServiceStart,
+  editServiceFinish,
+} from '../../redux/actionsWithServices';
 
 function ListOfServices() {
   const services = useSelector((state) => state.listServiceReducer);
-  console.log(services);
-
+  const edit = services.find((service) => service.edit);
   const dispatch = useDispatch();
 
   const handleRemove = (id) => {
+    if (edit) {
+      dispatch(editServiceFinish(edit.id, edit.service, edit.price));
+    }
     dispatch(removeService(id));
   };
 
   const handleEdit = (id) => {
-    const service = services.find((item) => item.id === id);
-    if (service.edit) {
-      console.log(service.edit);
+    if (edit) {
+      dispatch(editServiceFinish(edit.id, edit.service, edit.price));
     }
-
-    dispatch(prepareToEdit(service.id, service.service, Number(service.price)));
-    console.log(services);
+    const service = services.find((item) => item.id === id);
+    dispatch(editServiceStart(service.id, true));
   };
 
   return (
     <ul className="services">
       {services.map((item) => (
-        // item.edit? alert(item.id)
-
-        <li key={item.id} className="service-item">
+        <li key={item.id} className="service-item mb-2">
           {`${item.service} ${item.price}`}
-          {item.edit && <button>AAA</button>}
 
-          <button type="button" onClick={() => handleEdit(item.id)}>
+          <button
+            type="button"
+            className="btn btn-outline-warning mx-2"
+            onClick={() => handleEdit(item.id)}
+          >
             ✎
           </button>
-          <button type="button" onClick={() => handleRemove(item.id)}>
+          <button
+            type="button"
+            className="btn btn-outline-danger"
+            onClick={() => handleRemove(item.id)}
+          >
             ✖
           </button>
         </li>

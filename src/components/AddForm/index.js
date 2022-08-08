@@ -1,20 +1,25 @@
-// import PropTypes from 'prop-types'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addService } from '../../redux/actionsWithServices';
+import { addService, editServiceFinish } from '../../redux/actionsWithServices';
 
 function AddForm() {
   const services = useSelector((state) => state.listServiceReducer);
-  console.log(services);
+  const edit = services.find((service) => service.edit);
 
   const EMPTY_STATE = { service: '', price: '' };
   const [form, setForm] = useState(EMPTY_STATE);
 
-  const aaa = services?.find((item) => item.edit);
-  if (aaa) {
-    setForm({ service: aaa.service, price: aaa.price });
-  }
+  useEffect(() => {
+    if (edit) {
+      setForm({
+        service: edit?.service,
+        price: edit?.price,
+      });
+    } else {
+      setForm(EMPTY_STATE);
+    }
+  }, [edit?.service, edit?.price]);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -26,14 +31,21 @@ function AddForm() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setForm(EMPTY_STATE);
-    dispatch(addService(form));
+    if (edit) {
+      dispatch(editServiceFinish(edit.id, form.service, form.price));
+    } else {
+      dispatch(addService(form));
+    }
   };
   const handleReset = () => {
     setForm(EMPTY_STATE);
+    if (edit) {
+      dispatch(editServiceFinish(edit.id, edit.service, edit.price));
+    }
   };
 
   return (
-    <form className="service-form" onSubmit={handleSubmit}>
+    <form className="my-3 service-form" onSubmit={handleSubmit}>
       <div className="container text-center ">
         <div className=" row">
           <div className="service col">
@@ -63,12 +75,13 @@ function AddForm() {
             />
           </div>
 
-          <button className="btn btn-primary col" type="submit">
+          <button className="btn btn-success col btn-save" type="submit">
             Save
           </button>
+
           <button
-            className="btn btn-primary col"
-            type="reset"
+            className="btn btn-danger col"
+            type="button"
             onClick={() => handleReset()}
           >
             Cancel
@@ -78,7 +91,5 @@ function AddForm() {
     </form>
   );
 }
-
-// AddForm.propTypes = {}
 
 export default AddForm;

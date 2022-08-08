@@ -8,3 +8,11 @@
 .price {
   flex-grow: 3;
 }
+
+.btn-save {
+  margin-right: 20px;
+}
+
+.service-item {
+  list-style-type: none;
+}

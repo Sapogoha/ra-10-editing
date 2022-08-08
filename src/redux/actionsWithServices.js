@@ -8,14 +8,10 @@ export function removeService(id) {
   return { type: types.remove, payload: { id } };
 }
 
-export function editService(id, service, price) {
-  return { type: types.edit, payload: { id, service, price } };
+export function editServiceStart(id, edit) {
+  return { type: types.editStart, payload: { id, edit } };
 }
 
-// export function changeServiceField(service, value) {
-//   return { type: types.change, payload: { service, value } };
-// }
-
-export function prepareToEdit(id, service, price) {
-  return { type: types.prepare, payload: { id, service, price, edit: 'yep' } };
+export function editServiceFinish(id, service, price) {
+  return { type: types.editFinish, payload: { id, service, price } };
 }

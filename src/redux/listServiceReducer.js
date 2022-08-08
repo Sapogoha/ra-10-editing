@@ -1,8 +1,8 @@
 import types from './actionTypes';
 
 const INITIAL_STATE = [
-  { id: 1, service: 'Some service', price: 1000 },
-  { id: 2, service: 'Some other service', price: 2000 },
+  { id: 1, service: 'Some service', price: 1000, edit: false },
+  { id: 2, service: 'Some other service', price: 2000, edit: false },
 ];
 
 let serviceId = 2;
@@ -23,23 +23,16 @@ const listServiceReducer = (state = INITIAL_STATE, action) => {
       return state.filter((service) => service.id !== id);
     }
 
-    case types.edit: {
-      const { id, service, price } = action.payload;
-      return state.map((item) =>
-        item.id === id ? { ...item, service, price: price } : item
-      );
+    case types.editStart: {
+      const { id, edit } = action.payload;
+      return state.map((item) => (item.id === id ? { ...item, edit } : item));
     }
 
-    case types.prepare: {
-      const { id, service, price, edit } = action.payload;
-      // console.log(id);
-      // console.log(service);
-      // console.log(price);
-      // console.log(edit);
+    case types.editFinish: {
+      const { id, service, price } = action.payload;
       return state.map((item) =>
-        item.id === id ? { ...item, service, price: Number(price), edit } : item
+        item.id === id ? { ...item, service, price, edit: false } : item
       );
-      // return [...state, { id, service, price: Number(price), edit }];
     }
 
     default:
