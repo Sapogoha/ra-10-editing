@@ -15,3 +15,7 @@ export function editServiceStart(id, edit) {
 export function editServiceFinish(id, service, price) {
   return { type: types.editFinish, payload: { id, service, price } };
 }
+
+export function filterServices(element) {
+  return { type: types.filter, payload: { element } };
+}

@@ -1,5 +1,14 @@
+ul {
+  padding: 0;
+}
+
+h5 {
+  text-decoration: underline;
+}
+
 .service-form,
-.services {
+.services,
+.filter {
   width: 900px;
   margin: auto;
 }

@@ -1,4 +1,4 @@
-import types from './actionTypes';
+import types from '../actionTypes';
 
 const INITIAL_STATE = [
   { id: 1, service: 'Some service', price: 1000, edit: false },
@@ -12,7 +12,10 @@ const listServiceReducer = (state = INITIAL_STATE, action) => {
     case types.add: {
       const { service, price } = action.payload;
       serviceId += 1;
-      return [...state, { id: serviceId, service, price: Number(price) }];
+      return [
+        ...state,
+        { id: serviceId, service, price: Number(price), edit: false },
+      ];
     }
     case types.showAll: {
       return [...state];

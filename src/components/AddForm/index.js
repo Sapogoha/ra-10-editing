@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addService, editServiceFinish } from '../../redux/actionsWithServices';
 
 function AddForm() {
-  const services = useSelector((state) => state.listServiceReducer);
+  const services = useSelector((state) => state.listService);
   const edit = services.find((service) => service.edit);
 
   const EMPTY_STATE = { service: '', price: '' };

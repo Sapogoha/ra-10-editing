@@ -1,6 +1,7 @@
 import { combineReducers, compose, legacy_createStore } from 'redux';
 
-import listServiceReducer from './listServiceReducer';
+import listServiceReducer from './Reducers/listServiceReducer';
+import filterReducer from './Reducers/filterReducer';
 
 const ReactReduxDevTools =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
@@ -8,7 +9,8 @@ const ReactReduxDevTools =
 function configureStore() {
   return legacy_createStore(
     combineReducers({
-      listServiceReducer: listServiceReducer,
+      listService: listServiceReducer,
+      filter: filterReducer,
     }),
     undefined,
     compose(ReactReduxDevTools)

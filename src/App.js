@@ -1,13 +1,17 @@
 import './App.css';
 
 import AddForm from './components/AddForm';
-import ListOfServices from './components/ListOfServices';
+import FilteredList from './components/FilteredList';
+import Filter from './components/Filter';
+import FullList from './components/Full List';
 
 function App() {
   return (
     <div className="app">
       <AddForm />
-      <ListOfServices />
+      <Filter />
+      <FilteredList />
+      <FullList />
     </div>
   );
 }

@@ -5,6 +5,7 @@ const types = {
   change: 'CHANGE_SERVICE_FIELD',
   editStart: 'EDIT_SERVICE_START',
   editFinish: 'EDIT_SERVICE_FINIST',
+  filter: 'FILTER_SERVICES',
 };
 
 export default types;
